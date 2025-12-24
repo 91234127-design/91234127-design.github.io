@@ -1,15 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>台灣五大經典美食指南</title>
+    <title>台灣五大經典美食全指南</title>
     <style>
         :root {
             --primary-color: #8d4925;
             --bg-color: #f9f7f2;
             --card-bg: #ffffff;
             --text-color: #333;
+            --accent-color: #fff8f0;
         }
         body {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
@@ -17,179 +18,193 @@
             color: var(--text-color);
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
+        /* 頁首樣式 */
         header {
             text-align: center;
-            padding: 40px 0;
+            padding: 40px 20px;
             background-color: var(--primary-color);
             color: white;
-            margin-bottom: 30px;
-            border-radius: 8px;
         }
         .container {
             max-width: 900px;
-            margin: 0 auto;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* 首頁清單樣式 */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
         .food-card {
             background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
             overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
-        .food-image {
-            width: 100%;
-            height: auto;
-            display: block;
+        .food-card:hover { transform: translateY(-5px); }
+        .food-card img { width: 100%; height: 180px; object-fit: cover; }
+        .food-card h3 { text-align: center; padding: 15px; margin: 0; color: var(--primary-color); }
+
+        /* 詳細內容頁面樣式 (預設隱藏) */
+        .detail-page {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .content {
-            padding: 25px;
-        }
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-        h3 {
-            color: #555;
-            margin-top: 20px;
-        }
-        ul, ol {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        .tag {
+        .detail-page img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; }
+        .back-btn {
             display: inline-block;
-            background: #e9ecef;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
         }
-        footer {
-            text-align: center;
-            font-size: 0.9em;
-            color: #888;
-            margin-top: 50px;
-            padding-bottom: 30px;
+        .origin-section {
+            background: var(--accent-color);
+            padding: 20px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            margin: 20px 0;
         }
+        h2 { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        
+        footer { text-align: center; padding: 40px 0; color: #888; font-size: 0.9em; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>台灣五大經典美食製作指南</h1>
-    <p>品味地道台灣味，在家也能輕鬆做</p>
-</header>
-
-<div class="container">
-
-    <article class="food-card">
-        <img src="05.png" width="100" height="100" alt="滷肉飯" class="food-image">
-        <div class="content">
-            <h2>1. 滷肉飯 (Braised Pork Rice)</h2>
-            <span class="tag">國民小吃</span>
-            <p>滷肉飯是台灣最具代表性的國民小吃之一，以香噴噴的滷肉搭配 Q 彈的白米飯，每一口都是滿足。</p>
-            
-            <h3>【製作方法】</h3>
-            <ol>
-                <li><strong>食材準備：</strong> 豬五花肉、紅蔥頭、蒜頭、醬油、冰糖、米酒、五香粉、白胡椒粉、水、白米飯、滷蛋。</li>
-                <li><strong>處理肉品：</strong> 豬五花肉切成小丁（手切口感更佳）。</li>
-                <li><strong>爆香：</strong> 熱鍋放油，放入紅蔥頭碎和蒜末爆香至金黃色。</li>
-                <li><strong>炒肉：</strong> 加入豬五花肉丁煸炒至表面微焦並逼出油脂。</li>
-                <li><strong>調味：</strong> 加入醬油、冰糖、米酒、五香粉和白胡椒粉，翻炒均勻上色。</li>
-                <li><strong>燉煮：</strong> 加入足量的水，煮開後轉小火，蓋上鍋蓋滷煮約 1-1.5 小時，直到肉質軟爛入味。</li>
-                <li><strong>盛盤：</strong> 將滷肉淋在熱騰騰的白米飯上，搭配滷蛋和醃蘿蔔即可享用。</li>
-            </ol>
+<div id="home-view">
+    <header>
+        <h1>台灣五大經典美食製作指南</h1>
+        <p>點擊下方美食探索典故與食譜</p>
+    </header>
+    <div class="container">
+        <div class="menu-grid">
+            <div class="food-card" onclick="showDetail('pork')">
+                <img src="01.png" alt="滷肉飯"><h3>1. 滷肉飯</h3>
+            </div>
+            <div class="food-card" onclick="showDetail('oyster')">
+                <img src="02.png" alt="蚵仔煎"><h3>2. 蚵仔煎</h3>
+            </div>
+            <div class="food-card" onclick="showDetail('beef')">
+                <img src="03.png" alt="牛肉麵"><h3>3. 牛肉麵</h3>
+            </div>
+            <div class="food-card" onclick="showDetail('chicken')">
+                <img src="04.png" alt="鹽酥雞"><h3>4. 鹽酥雞</h3>
+            </div>
+            <div class="food-card" onclick="showDetail('tea')">
+                <img src="05.png" alt="珍珠奶茶"><h3>5. 珍珠奶茶</h3>
+            </div>
         </div>
-    </article>
-
-    <article class="food-card">
-        <img src="04.png" width="100" height="100" alt="蚵仔煎" class="food-image">
-        <div class="content">
-            <h2>2. 蚵仔煎 (Oyster Omelet)</h2>
-            <span class="tag">夜市必吃</span>
-            <p>Q 彈的粉漿、鮮美的蚵仔、清脆的蔬菜和特製醬料，是台灣夜市不可或缺的靈魂美食。</p>
-            
-            <h3>【製作方法】</h3>
-            <ol>
-                <li><strong>食材準備：</strong> 新鮮蚵仔、雞蛋、小白菜、太白粉（或地瓜粉）、清水、豆芽菜、蔥花。</li>
-                <li><strong>粉漿製作：</strong> 太白粉加清水調成比例適中的濃稠粉漿（通常粉水比約 1:2）。</li>
-                <li><strong>煎煮：</strong> 熱鍋放油，先放入蚵仔煎至半熟。</li>
-                <li><strong>加入蔬菜：</strong> 加入小白菜和豆芽菜，快速翻炒。</li>
-                <li><strong>淋粉漿：</strong> 將粉漿均勻淋在食材上，煎至邊緣呈現透明 Q 彈狀。</li>
-                <li><strong>打蛋：</strong> 將雞蛋打散淋在上面，待蛋液凝固後小心翻面。</li>
-                <li><strong>盛盤：</strong> 煎至兩面金黃，淋上特製甜辣醬或海山醬即可。</li>
-            </ol>
-        </div>
-    </article>
-
-    <article class="food-card">
-        <img src="03.png" width="100" height="100" alt="牛肉麵" class="food-image">
-        <div class="content">
-            <h2>3. 牛肉麵 (Beef Noodle Soup)</h2>
-            <span class="tag">台灣之光</span>
-            <p>結合了嚼勁十足的麵條、軟嫩牛肉與濃郁湯頭，這是一碗充滿層次感的經典料理。</p>
-            
-            <h3>【製作方法】</h3>
-            <ol>
-                <li><strong>食材準備：</strong> 牛腱肉、麵條、薑片、蔥段、八角、花椒、辣椒、豆瓣醬、醬油、冰糖、白蘿蔔、青江菜。</li>
-                <li><strong>牛肉處理：</strong> 牛腱肉切塊，焯水去血水後洗淨備用。</li>
-                <li><strong>炒香料：</strong> 熱鍋爆香薑、蔥、八角、花椒，加入豆瓣醬炒出紅油。</li>
-                <li><strong>燉煮：</strong> 加入牛肉翻炒，隨後加入醬油、米酒、冰糖及足量的水，大火煮開轉小火燉煮約 1.5-2 小時。</li>
-                <li><strong>煮麵：</strong> 另起一鍋水將麵條煮熟。</li>
-                <li><strong>組合：</strong> 碗中放入麵條、牛肉與白蘿蔔，淋上紅燒湯頭，撒上蔥花並放上燙青菜即可。</li>
-            </ol>
-        </div>
-    </article>
-
-    <article class="food-card">
-        <img src="02.png" width="100" height="100" alt="鹽酥雞" class="food-image">
-        <div class="content">
-            <h2>4. 鹽酥雞 (Popcorn Chicken)</h2>
-            <span class="tag">宵夜首選</span>
-            <p>香脆可口的炸雞塊搭配靈魂九層塔和蒜片，是讓人欲罷不能的誘人美味。</p>
-            
-            <h3>【製作方法】</h3>
-            <ol>
-                <li><strong>食材準備：</strong> 雞腿肉、地瓜粉、九層塔、蒜頭、醬油、五香粉、胡椒鹽。</li>
-                <li><strong>醃製：</strong> 雞肉切塊，加入醬油、米酒、五香粉、糖及少許太白粉抓勻，醃製 30 分鐘以上。</li>
-                <li><strong>裹粉：</strong> 將雞肉均勻裹上一層粗粒地瓜粉，靜置 5 分鐘待「回潮」。</li>
-                <li><strong>油炸：</strong> 油溫熱至 180°C，將雞塊炸至金黃酥脆撈起。</li>
-                <li><strong>增香：</strong> 最後放入九層塔和蒜片快速油炸 5 秒後立即撈出瀝油。</li>
-                <li><strong>調味：</strong> 撒上厚厚的胡椒鹽或辣椒粉拌勻即成。</li>
-            </ol>
-        </div>
-    </article>
-
-    <article class="food-card">
-        <img src="01.png" width="100" height="100" alt="珍珠奶茶" class="food-image">
-        <div class="content">
-            <h2>5. 珍珠奶茶 (Bubble Milk Tea)</h2>
-            <span class="tag">全球風靡</span>
-            <p>Q 彈的黑糖珍珠搭配濃郁奶茶，這不僅是飲品，更是台灣的一種生活文化。</p>
-            
-            <h3>【製作方法】</h3>
-            <ol>
-                <li><strong>食材準備：</strong> 紅茶葉、鮮奶、黑糖珍珠、冰塊。</li>
-                <li><strong>煮珍珠：</strong> 滾水下珍珠，煮熟後悶 20 分鐘，撈起過冷水，加入黑糖漿拌勻備用。</li>
-                <li><strong>泡茶：</strong> 紅茶葉用熱水沖泡 5-10 分鐘，濾掉茶葉取得濃茶湯。</li>
-                <li><strong>調製：</strong> 趁熱加入糖攪拌，再依個人喜好加入鮮奶或奶精拌勻。</li>
-                <li><strong>組合：</strong> 杯中加入珍珠、冰塊，最後倒入奶茶，搖晃均勻即可享用。</li>
-            </ol>
-        </div>
-    </article>
-
+    </div>
 </div>
 
-<footer>
-    <p>© 2025 台灣美食文化指南 | 願你在廚房也能創造美味</p>
-</footer>
+<div class="container">
+    <div id="detail-view" class="detail-page">
+        <div class="back-btn" onclick="showHome()">← 返回清單</div>
+        <div id="detail-content">
+            </div>
+    </div>
+</div>
+
+<footer><p>© 2025 台灣美食文化指南</p></footer>
+
+<script>
+    const foodData = {
+        pork: {
+            title: "滷肉飯 (Braised Pork Rice)",
+            img: "01.png",
+            origin: "起源於早期台灣農耕社會。當時物資匱乏，民眾買不起大塊豬肉，便向肉販索取切割剩餘的碎肉丁，混合紅蔥頭與醬油長時間燉煮，成為淋在飯上的鹹香肉燥，是勤儉持家的象徵。",
+            method: [
+                "豬五花肉切小丁（手切口感更佳）",
+                "熱鍋放油，放入紅蔥頭碎和蒜末爆香至金黃色",
+                "加入豬肉丁煸炒至表面微焦並逼出油脂",
+                "加入醬油、冰糖、米酒、五香粉和白胡椒粉翻炒上色",
+                "加入足量的水，小火滷煮約 1-1.5 小時至肉質軟爛"
+            ]
+        },
+        oyster: {
+            title: "蚵仔煎 (Oyster Omelet)",
+            img: "02.png",
+            origin: "傳聞起源於鄭成功收復台灣時期。當時荷蘭軍隊切斷糧草，鄭軍利用沿海盛產的蚵仔，混合地瓜粉水與蔬菜煎成餅充飢，後來演變成廣受歡迎的夜市小吃。",
+            method: [
+                "太白粉加清水調成比例適中的粉漿",
+                "熱鍋放油，先放入蚵仔煎至半熟",
+                "加入小白菜和豆芽菜快速翻炒",
+                "均勻淋上粉漿，煎至邊緣呈現透明 Q 彈狀",
+                "打入雞蛋，待凝固後翻面煎至兩面金黃"
+            ]
+        },
+        beef: {
+            title: "牛肉麵 (Beef Noodle Soup)",
+            img: "03.png",
+            origin: "台灣牛肉麵是眷村文化的結晶。早期台灣農村不食耕牛，1949 年後移居台灣的四川籍老兵因思鄉之情，結合家鄉豆瓣醬與麵食，研發出獨特的台式紅燒牛肉麵。",
+            method: [
+                "牛腱肉切塊，焯水去血水後洗淨備用",
+                "爆香薑、蔥、八角、花椒，加入豆瓣醬炒出紅油",
+                "加入牛肉翻炒後，加入醬油、米酒、冰糖及足量的水",
+                "轉小火燉煮約 1.5-2 小時",
+                "另鍋煮熟麵條，加入牛肉與湯頭即可"
+            ]
+        },
+        chicken: {
+            title: "鹽酥雞 (Popcorn Chicken)",
+            img: "04.png",
+            origin: "1970 年代源於台南。為了讓顧客在夜市邊走邊吃，將炸雞切成一口大小，並創新加入九層塔（羅勒）一同油炸，其獨特的香氣成為台灣宵夜的代名詞。",
+            method: [
+                "雞肉切塊，加入醬油、五香粉等醃製 30 分鐘",
+                "雞肉均勻裹上粗粒地瓜粉，靜置待回潮",
+                "油溫 180°C，將雞塊炸至金黃酥脆",
+                "最後放入九層塔和蒜片快速油炸 5 秒撈出",
+                "撒上厚厚的胡椒鹽或辣椒粉拌勻"
+            ]
+        },
+        tea: {
+            title: "珍珠奶茶 (Bubble Milk Tea)",
+            img: "05.png",
+            origin: "1980 年代在台灣發明。靈感來自於將傳統甜點粉圓與西式奶茶結合，首創了「邊喝邊嚼」的獨特飲用體驗，現已成為風靡全球的台灣文化符號。",
+            method: [
+                "滾水下珍珠，煮熟後悶 20 分鐘，撈起拌入黑糖漿",
+                "紅茶葉沖泡成濃茶湯，濾掉茶葉",
+                "依喜好加入鮮奶或奶精拌勻",
+                "杯中加入珍珠、冰塊，最後倒入奶茶搖晃均勻"
+            ]
+        }
+    };
+
+    function showDetail(foodKey) {
+        const data = foodData[foodKey];
+        const content = `
+            <img src="${data.img}" alt="${data.title}">
+            <h1>${data.title}</h1>
+            <div class="origin-section">
+                <strong>【美食典故】</strong><br>${data.origin}
+            </div>
+            <h2>【製作方法】</h2>
+            <ol>
+                ${data.method.map(item => `<li>${item}</li>`).join('')}
+            </ol>
+        `;
+        document.getElementById('detail-content').innerHTML = content;
+        document.getElementById('home-view').style.display = 'none';
+        document.getElementById('detail-view').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function showHome() {
+        document.getElementById('home-view').style.display = 'block';
+        document.getElementById('detail-view').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
