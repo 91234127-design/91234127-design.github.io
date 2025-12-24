@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣五大經典美食全指南</title>
+    <style>
+        :root {
+            --primary-color: #8d4925;
+            --bg-color: #f9f7f2;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --accent-color: #fff8f0;
+        }
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        /* 頁首樣式 */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* 首頁清單樣式 */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .food-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .food-card:hover { transform: translateY(-5px); }
+        .food-card img { width: 100%; height: 180px; object-fit: cover; }
+        .food-card h3 { text-align: center; padding: 15px; margin: 0; color: var(--primary-color); }
+
+        /* 詳細內容頁面樣式 (預設隱藏) */
+        .detail-page {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .detail-page img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .origin-section {
+            background: var(--accent-color);
+            padding: 20px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        h2 { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        
+        footer { text-align: center; padding: 40px 0; color: #888; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div id="home-view">
+    <header>
+        <h1>台灣五大經典美食製作指南</h1>
+        <p>點擊下方美食探索典故與食譜</p>
+    </header>
+    <div class="container">
+        <div class="menu-grid">
+            <div class="food-card" onclick="showDetail('pork')">
+                <img src="01.png" alt="滷肉飯"><h3>1. 滷肉飯</h3>
+            </div>
+            <div class="food-card" onclick="showDetail('oyster')">
+                <img src="02.png" alt="蚵仔煎"><h3>2. 蚵仔煎</h3>
+            </div>
+            <div class="food-card" onclick="showDetail('beef')">
+                <img src="03.png" alt="牛肉麵"><h3>3. 牛肉麵</h3>
+            </div>
+            <div class="food-card" onclick="showDetail('chicken')">
+                <img src="04.png" alt="鹽酥雞"><h3>4. 鹽酥雞</h3>
+            </div>
+            <div class="food-card" onclick="showDetail('tea')">
+                <img src="05.png" alt="珍珠奶茶"><h3>5. 珍珠奶茶</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="detail-view" class="detail-page">
+        <div class="back-btn" onclick="showHome()">← 返回清單</div>
+        <div id="detail-content">
+            </div>
+    </div>
+</div>
+
+<footer><p>© 2025 台灣美食文化指南</p></footer>
+
+<script>
+    const foodData = {
+        pork: {
+            title: "滷肉飯 (Braised Pork Rice)",
+            img: "01.png",
+            origin: "起源於早期台灣農耕社會。當時物資匱乏，民眾買不起大塊豬肉，便向肉販索取切割剩餘的碎肉丁，混合紅蔥頭與醬油長時間燉煮，成為淋在飯上的鹹香肉燥，是勤儉持家的象徵。",
+            method: [
+                "豬五花肉切小丁（手切口感更佳）",
+                "熱鍋放油，放入紅蔥頭碎和蒜末爆香至金黃色",
+                "加入豬肉丁煸炒至表面微焦並逼出油脂",
+                "加入醬油、冰糖、米酒、五香粉和白胡椒粉翻炒上色",
+                "加入足量的水，小火滷煮約 1-1.5 小時至肉質軟爛"
+            ]
+        },
+        oyster: {
+            title: "蚵仔煎 (Oyster Omelet)",
+            img: "02.png",
+            origin: "傳聞起源於鄭成功收復台灣時期。當時荷蘭軍隊切斷糧草，鄭軍利用沿海盛產的蚵仔，混合地瓜粉水與蔬菜煎成餅充飢，後來演變成廣受歡迎的夜市小吃。",
+            method: [
+                "太白粉加清水調成比例適中的粉漿",
+                "熱鍋放油，先放入蚵仔煎至半熟",
+                "加入小白菜和豆芽菜快速翻炒",
+                "均勻淋上粉漿，煎至邊緣呈現透明 Q 彈狀",
+                "打入雞蛋，待凝固後翻面煎至兩面金黃"
+            ]
+        },
+        beef: {
+            title: "牛肉麵 (Beef Noodle Soup)",
+            img: "03.png",
+            origin: "台灣牛肉麵是眷村文化的結晶。早期台灣農村不食耕牛，1949 年後移居台灣的四川籍老兵因思鄉之情，結合家鄉豆瓣醬與麵食，研發出獨特的台式紅燒牛肉麵。",
+            method: [
+                "牛腱肉切塊，焯水去血水後洗淨備用",
+                "爆香薑、蔥、八角、花椒，加入豆瓣醬炒出紅油",
+                "加入牛肉翻炒後，加入醬油、米酒、冰糖及足量的水",
+                "轉小火燉煮約 1.5-2 小時",
+                "另鍋煮熟麵條，加入牛肉與湯頭即可"
+            ]
+        },
+        chicken: {
+            title: "鹽酥雞 (Popcorn Chicken)",
+            img: "04.png",
+            origin: "1970 年代源於台南。為了讓顧客在夜市邊走邊吃，將炸雞切成一口大小，並創新加入九層塔（羅勒）一同油炸，其獨特的香氣成為台灣宵夜的代名詞。",
+            method: [
+                "雞肉切塊，加入醬油、五香粉等醃製 30 分鐘",
+                "雞肉均勻裹上粗粒地瓜粉，靜置待回潮",
+                "油溫 180°C，將雞塊炸至金黃酥脆",
+                "最後放入九層塔和蒜片快速油炸 5 秒撈出",
+                "撒上厚厚的胡椒鹽或辣椒粉拌勻"
+            ]
+        },
+        tea: {
+            title: "珍珠奶茶 (Bubble Milk Tea)",
+            img: "05.png",
+            origin: "1980 年代在台灣發明。靈感來自於將傳統甜點粉圓與西式奶茶結合，首創了「邊喝邊嚼」的獨特飲用體驗，現已成為風靡全球的台灣文化符號。",
+            method: [
+                "滾水下珍珠，煮熟後悶 20 分鐘，撈起拌入黑糖漿",
+                "紅茶葉沖泡成濃茶湯，濾掉茶葉",
+                "依喜好加入鮮奶或奶精拌勻",
+                "杯中加入珍珠、冰塊，最後倒入奶茶搖晃均勻"
+            ]
+        }
+    };
+
+    function showDetail(foodKey) {
+        const data = foodData[foodKey];
+        const content = `
+            <img src="${data.img}" alt="${data.title}">
+            <h1>${data.title}</h1>
+            <div class="origin-section">
+                <strong>【美食典故】</strong><br>${data.origin}
+            </div>
+            <h2>【製作方法】</h2>
+            <ol>
+                ${data.method.map(item => `<li>${item}</li>`).join('')}
+            </ol>
+        `;
+        document.getElementById('detail-content').innerHTML = content;
+        document.getElementById('home-view').style.display = 'none';
+        document.getElementById('detail-view').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function showHome() {
+        document.getElementById('home-view').style.display = 'block';
+        document.getElementById('detail-view').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
