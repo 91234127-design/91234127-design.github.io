@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高雄在地美食介紹 - 陳欣微</title>
+    <style>
+        /* CSS 樣式設定 */
+        body {
+            font-family: "Microsoft JhengHei", "Heiti TC", sans-serif;
+            background-color: #fffaf0; /* 溫暖的米色背景 */
+            margin: 0;
+            padding: 0;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        /* 頁首 Header */
+        header {
+            background-color: #d35400; /* 美食橘色 */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+        }
+
+        /* 學生資訊樣式 */
+        .student-info {
+            background-color: #e67e22;
+            color: #fff;
+            padding: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+            border-radius: 50px;
+            padding-left: 30px;
+            padding-right: 30px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        /* 導覽列 Navigation */
+        nav {
+            background-color: #2c3e50;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            display: inline-block;
+            color: white;
+            padding: 15px 15px; /* 稍微調整間距以容納新選項 */
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #f1c40f;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* 內容容器 */
+        .container {
+            max-width: 960px;
+            margin: 30px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            min-height: 60vh;
+        }
+
+        /* 分頁控制 */
+        .page {
+            display: none; /* 預設隱藏所有頁面 */
+            animation: fadeIn 0.6s ease;
+        }
+
+        .page.active {
+            display: block; /* 顯示當前頁面 */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 圖片樣式 */
+        .food-img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
+        }
+
+        /* 心得報告專用樣式 */
+        .reflection-block {
+            background-color: #fdfefe;
+            border-left: 6px solid #2980b9;
+            padding: 20px 30px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .reflection-block p {
+            font-size: 1.1rem;
+            color: #34495e;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* 文字排版 */
+        h2 {
+            color: #d35400;
+            border-left: 5px solid #d35400;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin-top: 30px;
+            background-color: #ecf0f1;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* 首頁卡片區 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 25px;
+            background-color: #7f8c8d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-back:hover {
+            background-color: #95a5a6;
+        }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>高雄在地美食巡禮</h1>
+        <div class="student-info">
+            班級：進餐三甲 &nbsp;&nbsp;|&nbsp;&nbsp; 姓名：陳欣微 &nbsp;&nbsp;|&nbsp;&nbsp; 學號：91234127
+        </div>
+    </header>
+
+    <nav>
+        <a onclick="switchPage('home')" id="link-home" class="active">首頁總覽</a>
+        <a onclick="switchPage('p1')" id="link-p1">岡山羊肉爐</a>
+        <a onclick="switchPage('p2')" id="link-p2">虱目魚肚</a>
+        <a onclick="switchPage('p3')" id="link-p3">鹽埕鴨肉飯</a>
+        <a onclick="switchPage('p4')" id="link-p4">木瓜牛奶</a>
+        <a onclick="switchPage('p5')" id="link-p5">旗津烤小卷</a>
+        <a onclick="switchPage('reflection')" id="link-reflection">心得報告</a> </nav>
+
+    <div class="container">
+
+        <div id="home" class="page active">
+            <h2 style="border:none; text-align:center; font-size:1.8rem;">探索港都風味</h2>
+            <p style="text-align:center; color:#666; margin-bottom:30px;">
+                高雄不僅擁有美麗的海港景色，更有著深厚的飲食文化底蘊。<br>
+                以下精選五道最具代表性的在地美食，請點擊圖片或上方連結查看詳細介紹。
+            </p>
+            
+            <div class="grid-container">
+                <div class="card" onclick="switchPage('p1')">
+                    <img src="1.png" alt="岡山羊肉爐">
+                    <div class="card-content">
+                        <div class="card-title">岡山羊肉爐</div>
+                        <span>暖心補身的在地經典</span>
+                    </div>
+                </div>
+                <div class="card" onclick="switchPage('p2')">
+                    <img src="2.png" alt="虱目魚肚">
+                    <div class="card-content">
+                        <div class="card-title">虱目魚肚</div>
+                        <span>鮮嫩肥美的家常滋味</span>
+                    </div>
+                </div>
+                <div class="card" onclick="switchPage('p3')">
+                    <img src="3.png" alt="鹽埕鴨肉飯">
+                    <div class="card-content">
+                        <div class="card-title">鹽埕鴨肉飯</div>
+                        <span>老城區的鴨油飄香</span>
+                    </div>
+                </div>
+                <div class="card" onclick="switchPage('p4')">
+                    <img src="4.png" alt="木瓜牛奶">
+                    <div class="card-content">
+                        <div class="card-title">木瓜牛奶</div>
+                        <span>濃醇香甜的黃金比例</span>
+                    </div>
+                </div>
+                <div class="card" onclick="switchPage('p5')">
+                    <img src="5.png" alt="旗津烤小卷">
+                    <div class="card-content">
+                        <div class="card-title">旗津烤小卷</div>
+                        <span>海風中的炭烤香氣</span>
+                    </div>
+                </div>
+                 <div class="card" onclick="switchPage('reflection')" style="background-color: #eaf2f8;">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="心得報告">
+                    <div class="card-content">
+                        <div class="card-title">學習心得報告</div>
+                        <span>AI 與網頁設計的學習歷程</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="p1" class="page">
+            <img src="1.png" class="food-img" alt="岡山羊肉爐">
+            <h2>1. 岡山羊肉爐 (Gangshan Mutton Hotpot)</h2>
+            
+            <h3>📖 歷史典故</h3>
+            <p>「岡山羊肉」之所以聞名全台，與高雄岡山的地利環境息息相關。早年岡山是南台灣重要的羊隻交易市場，加上附近的泥火山地形使得生長的草質帶有鹽分，非常適合羊群放牧，這裡的土產羊肉質地特別鮮嫩且無腥味。</p>
+            <p>日治時期與光復初期，岡山街頭便開始出現販賣羊肉湯的攤販。隨著時間演變，從單純的羊肉湯發展出今日的「藥膳湯頭」與「當歸湯頭」等羊肉爐文化，搭配特製的豆瓣醬（岡山三寶之一），成為高雄人冬日進補或聚餐的首選。</p>
+
+            <h3>👨‍🍳 製作做法</h3>
+            <ol>
+                <li><strong>食材準備：</strong>選用帶皮的本土山羊肉（排骨或三層肉），切塊後放入滾水川燙去血水，撈起瀝乾。</li>
+                <li><strong>爆炒香料：</strong>鍋中倒入黑麻油，放入大量老薑片爆香，待薑片邊緣捲曲後，放入羊肉塊大火翻炒。</li>
+                <li><strong>燉煮：</strong>將炒香的羊肉移入湯鍋，加入米酒、專用中藥包（含當歸、川芎、枸杞等）、黑豆瓣醬與水。</li>
+                <li><strong>慢火細燉：</strong>蓋上鍋蓋，以小火燉煮約1.5至2小時，直到羊肉軟嫩Q彈。</li>
+                <li><strong>上桌：</strong>食用時可加入高麗菜、凍豆腐、豆皮等配料，並蘸上岡山特產的豆瓣醬食用。</li>
+            </ol>
+            <a onclick="switchPage('home')" class="btn-back">⬅ 返回首頁</a>
+        </div>
+
+        <div id="p2" class="page">
+            <img src="2.png" class="food-img" alt="虱目魚肚">
+            <h2>2. 虱目魚肚 (Milkfish Maw)</h2>
+
+            <h3>📖 歷史典故</h3>
+            <p>虱目魚被稱為台灣的「家魚」，而高雄的彌陀、茄萣一帶是全台重要的養殖產地。關於名稱由來有一傳說：相傳鄭成功抵台時，漁民獻上此魚，鄭成功問「什麼魚？」（Siá-mih hî），口音被誤傳為「虱目魚」。</p>
+            <p>高雄人對虱目魚的熱愛體現在早餐文化上，尤其是富含油脂的「魚肚」部位，最為珍貴。早期生活物資缺乏，能吃到一塊肥美的魚肚是對辛苦勞作最大的犒賞。無論是乾煎還是煮湯，都是高雄沿海地區最道地的家鄉味。</p>
+
+            <h3>👨‍🍳 製作做法 (香煎風味)</h3>
+            <ol>
+                <li><strong>魚肚處理：</strong>將無刺虱目魚肚洗淨，用廚房紙巾完全擦乾水分（這步最重要，避免下鍋噴油），抹上少許鹽巴醃漬約10分鐘。</li>
+                <li><strong>熱鍋冷油：</strong>使用平底鍋，只需放少許油（魚肚本身富含油脂）。</li>
+                <li><strong>慢煎：</strong>先將魚皮面朝下放入鍋中，蓋上鍋蓋轉中小火慢煎，逼出魚油。</li>
+                <li><strong>翻面：</strong>待魚肚邊緣呈現金黃色且魚身定型後翻面，煎至兩面金黃酥脆。</li>
+                <li><strong>調味：</strong>起鍋後撒上胡椒鹽與檸檬汁去腥解膩，即可享用外酥內嫩的魚肚。</li>
+            </ol>
+            <a onclick="switchPage('home')" class="btn-back">⬅ 返回首頁</a>
+        </div>
+
+        <div id="p3" class="page">
+            <img src="3.png" class="food-img" alt="鹽埕鴨肉飯">
+            <h2>3. 鹽埕鴨肉飯 (Yancheng Duck Rice)</h2>
+
+            <h3>📖 歷史典故</h3>
+            <p>鹽埕區曾是高雄最繁華的商業與政治中心，聚集了許多勞工與商人，因而誕生了許多講求「快速、美味、飽足」的小吃。鹽埕鴨肉飯便是其中的經典代表。</p>
+            <p>不同於北部鴨肉飯可能有濃稠醬汁，高雄鹽埕風格多半強調「鴨油香」。老店通常會將全鴨烹煮後，將精華的鴨油收集起來，淋在熱騰騰的白飯上，搭配去骨的手切鴨肉，簡單卻極具深度，承載了老高雄人的共同記憶。</p>
+
+            <h3>👨‍🍳 製作做法</h3>
+            <ol>
+                <li><strong>水煮原味：</strong>挑選成熟肥美的土番鴨，放入大鍋滾水中，加入薑、蔥、米酒，細火慢煮至熟透，保留鴨肉最原始的鮮甜。</li>
+                <li><strong>提煉鴨油：</strong>煮鴨的高湯表面會浮起厚厚的黃金鴨油，將其撇起，加入紅蔥頭酥炸，製成靈魂醬汁（鴨油蔥）。</li>
+                <li><strong>刀工切肉：</strong>將煮熟冷卻後的鴨肉去骨，切成片狀或條狀。</li>
+                <li><strong>組合盛裝：</strong>盛一碗熱騰騰的白飯，鋪上滿滿的鴨肉，豪邁地淋上特製鴨油醬汁，通常會搭配醃漬的小黃瓜或薑片解膩。</li>
+            </ol>
+            <a onclick="switchPage('home')" class="btn-back">⬅ 返回首頁</a>
+        </div>
+
+        <div id="p4" class="page">
+            <img src="4.png" class="food-img" alt="木瓜牛奶">
+            <h2>4. 木瓜牛奶 (Papaya Milk)</h2>
+
+            <h3>📖 歷史典故</h3>
+            <p>雖然台灣各地都有木瓜牛奶，但高雄的「高雄牛乳大王」在1960年代將這款飲品推向高峰，成為全台知名的「國民飲料」。</p>
+            <p>高雄地處熱帶，周邊產區（如屏東、大樹）盛產高品質木瓜。早年冰果室文化盛行，店家大膽嘗試將熟透的網室木瓜與新鮮牛乳結合，意外創造出濃郁香醇的口感。在炎熱的高雄午後，一杯冰涼濃稠的木瓜牛奶是消暑的最佳良方。</p>
+
+            <h3>👨‍🍳 製作做法</h3>
+            <ol>
+                <li><strong>挑選木瓜：</strong>關鍵在於熟度，必須選用皮紅肉軟、香氣濃郁的完熟木瓜。若木瓜帶青味或苦味會破壞整杯風味。</li>
+                <li><strong>黃金比例：</strong>一般建議比例為「木瓜：牛奶：碎冰 = 1：1.5：0.5」，並加入適量的糖或煉乳提味。</li>
+                <li><strong>攪打技巧：</strong>將去皮去籽切塊的木瓜、鮮奶、碎冰放入果汁機。</li>
+                <li><strong>速度控制：</strong>攪打時間不能太長，約10-15秒即可，以免木瓜酵素與牛奶作用產生苦味或凝結成塊。</li>
+                <li><strong>即時享用：</strong>木瓜牛奶必須現打現喝，超過15-20分鐘後口感會變質。</li>
+            </ol>
+            <a onclick="switchPage('home')" class="btn-back">⬅ 返回首頁</a>
+        </div>
+
+        <div id="p5" class="page">
+            <img src="5.png" class="food-img" alt="旗津烤小卷">
+            <h2>5. 旗津烤小卷 (Cijin Grilled Squid)</h2>
+
+            <h3>📖 歷史典故</h3>
+            <p>搭乘渡輪前往旗津，一下船就能聞到濃濃的炭烤香氣。旗津是高雄最早開發的漁港之一，海產資源極度豐富。</p>
+            <p>早年漁民將捕獲的小卷（鎖管）直接在路邊架起炭火販售，因新鮮度極高且價格親民，迅速成為觀光客的最愛。走在旗津老街，人手一支沾滿醬汁、撒滿芝麻的烤小卷，已經成為來到這裡旅遊的標準儀式感。</p>
+
+            <h3>👨‍🍳 製作做法</h3>
+            <ol>
+                <li><strong>食材挑選：</strong>選用新鮮捕撈的小卷，洗淨後不需過度調味，部分店家會先稍微川燙定型以縮短燒烤時間。</li>
+                <li><strong>炭火燒烤：</strong>使用傳統炭火燒烤，利用高溫炭香鎖住小卷的水分與鮮甜，這是瓦斯爐無法取代的風味。</li>
+                <li><strong>獨門刷醬：</strong>燒烤過程中，反覆刷上特製的烤肉醬（通常含有醬油膏、沙茶、蒜泥、糖與獨門香料）。</li>
+                <li><strong>收尾提香：</strong>烤至醬汁收乾、小卷呈現焦糖色澤，用剪刀剪開邊緣，最後撒上大量的白芝麻增加香氣，也可依個人喜好撒上辣椒粉。</li>
+            </ol>
+            <a onclick="switchPage('home')" class="btn-back">⬅ 返回首頁</a>
+        </div>
+
+        <div id="reflection" class="page">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" class="food-img" alt="Coding and Technology">
+            <h2>學習心得報告</h2>
+            
+            <div class="reflection-block">
+                <p>
+                    在製作「南臺灣美食指南」網頁的過程中，我深刻感受到網際網路技術與 AI 結合所帶來的改變。透過 HTML5 與 Tailwind CSS，我學會將零散的美食資訊整理成清楚、美觀且容易閱讀的網頁內容，也體會到網頁設計不只是技術，更是一種傳遞文化的方式。
+                </p>
+                <p>
+                    在 AI 的輔助下，從資料整理、程式碼除錯到版面優化，都變得更加有效率。AI 就像一位可靠的夥伴，幫助我嘗試更多想法，也讓學習過程更加順暢。
+                </p>
+                <p>
+                    這次經驗讓我明白，結合網際網路技術與 AI 已是數位時代的重要能力。未來我希望持續運用這些工具，創作出更有溫度、貼近生活的數位內容，讓科技真正服務人們的需求。
+                </p>
+            </div>
+
+            <a onclick="switchPage('home')" class="btn-back">⬅ 返回首頁</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 高雄在地美食介紹作業 | 進餐三甲 陳欣微</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // 切換分頁的 JavaScript 函數
+        function switchPage(pageId) {
+            // 1. 隱藏所有頁面
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 2. 顯示目標頁面
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // 3. 更新導覽列狀態
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            const targetLink = document.getElementById('link-' + pageId);
+            if (targetLink) {
+                targetLink.classList.add('active');
+            }
+
+            // 4. 畫面捲動到頂部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
